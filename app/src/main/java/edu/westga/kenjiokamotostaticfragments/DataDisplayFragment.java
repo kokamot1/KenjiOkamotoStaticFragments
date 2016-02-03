@@ -1,13 +1,13 @@
 package edu.westga.kenjiokamotostaticfragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class DataDisplayFragment extends Fragment {
     private TextView productText;
@@ -15,6 +15,11 @@ public class DataDisplayFragment extends Fragment {
     private double number2;
     private double product;
 
+    interface CalculateSumButtonListener {
+        void handleSumButtonClick();
+    }
+    private CalculateSumButtonListener listener;
+    
     public void setNumber2(double number2) {
         this.number2 = number2;
     }
@@ -38,7 +43,36 @@ public class DataDisplayFragment extends Fragment {
         // Inflate the layout for this fragment
         View theView = inflater.inflate(R.layout.fragment_data_display, container, false);
         this.productText = (TextView) theView.findViewById(R.id.product);
+
+        Button sumButton = (Button) theView.findViewById(R.id.sum_button);
+        sumButton.setOnClickListener(new View.OnClickListener() {
+                                         public void onClick(View v) {
+                                             sumButtonClicked();
+                                         }
+                                     }
+        );
+
         return theView;
     }
 
+    private void sumButtonClicked() {
+        listener.handleSumButtonClick();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof CalculateSumButtonListener) {
+            this.listener = (CalculateSumButtonListener) context;
+        } else {
+            throw new ClassCastException(context.toString()
+                    + " must implemenet DataDisplayFragment.CalculateSumButtonListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        this.listener = null;
+    }
 }
