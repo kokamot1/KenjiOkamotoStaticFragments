@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="0"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:id="@+id/product"/>
 
     <Button
         android:layout_width="wrap_content"
