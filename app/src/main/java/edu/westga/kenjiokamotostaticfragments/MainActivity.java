@@ -9,17 +9,31 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity implements DataEntryFragment.DataEntryListener {
+public class MainActivity extends AppCompatActivity
+        implements DataEntryFragment.DataEntryListener, DataDisplayFragment.CalculateSumButtonListener {
+        private double number1;
+        private double number2;
 
     @Override
     public void onDataEntry(double number1, double number2) {
+        this.number1 = number1;
+        this.number2 = number2;
         DataDisplayFragment displayFragment =
             (DataDisplayFragment) getSupportFragmentManager().findFragmentById(R.id.dataDisplayFragment);
         displayFragment.setNumber1(number1);
         displayFragment.setNumber2(number2);
         displayFragment.multiply();
         displayFragment.displayProduct();
+    }
 
+    @Override
+    public void handleSumButtonClick() {
+        DisplaySumFragment displaySumFragment =
+                (DisplaySumFragment) getSupportFragmentManager().findFragmentById(R.id.displaySumFragment);
+        displaySumFragment.setNumber1(this.number1);
+        displaySumFragment.setNumber2(this.number2);
+        displaySumFragment.addNumbers();
+        displaySumFragment.displaySum();
     }
 
     @Override
