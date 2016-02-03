@@ -22,4 +22,12 @@
         android:name="edu.westga.kenjiokamotostaticfragments.DataDisplayFragment"
         android:id="@+id/dataDisplayFragment"
         tools:layout="@layout/fragment_data_display" />
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="edu.westga.kenjiokamotostaticfragments.DisplaySumFragment"
+        android:id="@+id/displaySumFragment"
+        tools:layout="@layout/fragment_display_sum" />
+
 </LinearLayout>
