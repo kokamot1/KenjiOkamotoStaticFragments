@@ -9,7 +9,18 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DataEntryFragment.DataEntryListener {
+
+    @Override
+    public void onDataEntry(double number1, double number2) {
+        DataDisplayFragment displayFragment =
+            (DataDisplayFragment) getSupportFragmentManager().findFragmentById(R.id.dataDisplayFragment);
+        displayFragment.setNumber1(number1);
+        displayFragment.setNumber2(number2);
+        displayFragment.multiply();
+        displayFragment.displayProduct();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
