@@ -47,9 +47,11 @@ public class DataEntryFragment extends Fragment {
     }
 
     private void multiplyButtonClicked(View v) {
-        double number1 = Double.parseDouble(this.number1Text.getText().toString());
-        double number2 = Double.parseDouble(this.number2Text.getText().toString());
-        this.listener.onDataEntry(number1, number2);
+        try {
+            double number1 = Double.parseDouble(this.number1Text.getText().toString());
+            double number2 = Double.parseDouble(this.number2Text.getText().toString());
+            this.listener.onDataEntry(number1, number2);
+        } catch (NumberFormatException exception) {}
     }
 
     @Override

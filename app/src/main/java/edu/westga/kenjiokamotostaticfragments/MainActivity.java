@@ -13,11 +13,13 @@ public class MainActivity extends AppCompatActivity
         implements DataEntryFragment.DataEntryListener, DataDisplayFragment.CalculateSumButtonListener {
         private double number1;
         private double number2;
+        private boolean numbersSet = false;
 
     @Override
     public void onDataEntry(double number1, double number2) {
         this.number1 = number1;
         this.number2 = number2;
+        numbersSet = true;
         DataDisplayFragment displayFragment =
             (DataDisplayFragment) getSupportFragmentManager().findFragmentById(R.id.dataDisplayFragment);
         displayFragment.setNumber1(number1);
@@ -28,12 +30,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void handleSumButtonClick() {
-        DisplaySumFragment displaySumFragment =
-                (DisplaySumFragment) getSupportFragmentManager().findFragmentById(R.id.displaySumFragment);
-        displaySumFragment.setNumber1(this.number1);
-        displaySumFragment.setNumber2(this.number2);
-        displaySumFragment.addNumbers();
-        displaySumFragment.displaySum();
+        if (numbersSet) {
+            DisplaySumFragment displaySumFragment =
+                    (DisplaySumFragment) getSupportFragmentManager().findFragmentById(R.id.displaySumFragment);
+            displaySumFragment.setNumber1(this.number1);
+            displaySumFragment.setNumber2(this.number2);
+            displaySumFragment.addNumbers();
+            displaySumFragment.displaySum();
+        }
     }
 
     @Override
